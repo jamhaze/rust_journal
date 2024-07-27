@@ -1,25 +1,10 @@
 use std::io;
 
-struct Entry {
-    datetime_string: String,
-    text: String,
-}
-
-impl Entry {
-    fn new(text: String) -> Self {
-        Self {
-            datetime_string: String::from("2024-07-14 11:30:00"),
-            text,
-        }
-    }
-
-    fn print_entry(&self) {
-        println!("{} - {}", self.datetime_string, self.text);
-    }
-}
+mod journal;
 
 fn main() {
     println!("~ Journal ~");
+    let mut new_journal = journal::Journal::new();
 
     loop {
         let mut choice = String::new();
@@ -40,9 +25,8 @@ fn main() {
                 io::stdin()
                     .read_line(&mut entry_text)
                     .expect("Failed to read line.");
-                let entry_text = entry_text.trim().to_string();
-                let entry = Entry::new(entry_text);
-                entry.print_entry();
+                new_journal.new_entry(entry_text.trim());
+                new_journal.print_all_entries();
             }
             "2" => {
                 println!("Exiting Program...");
