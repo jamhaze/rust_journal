@@ -12,8 +12,8 @@ impl Entry {
         }
     }
 
-    fn print_entry(&self) {
-        println!("{} - {}", self.datetime_string, self.text);
+    fn format_entry(&self) -> String {
+        format!("{} - {}", self.datetime_string, self.text)
     }
 }
 
@@ -36,9 +36,11 @@ impl Journal {
         self.entries.push(entry);
     }
 
-    pub fn print_all_entries(&self) {
-        for i in &self.entries {
-            i.print_entry();
+    pub fn get_formatted_entries(&self) -> Vec<String> {
+        let mut formatted_entries = Vec::new();
+        for entry in &self.entries {
+            formatted_entries.push(entry.format_entry());
         }
+        formatted_entries
     }
 }

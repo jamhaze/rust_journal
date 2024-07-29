@@ -26,7 +26,10 @@ fn main() {
                     .read_line(&mut entry_text)
                     .expect("Failed to read line.");
                 new_journal.new_entry(entry_text.trim());
-                new_journal.print_all_entries();
+                let formatted_entries = new_journal.get_formatted_entries();
+                for entry in &formatted_entries {
+                    println!("{entry}");
+                }
             }
             "2" => {
                 println!("Exiting Program...");
