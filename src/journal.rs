@@ -1,6 +1,9 @@
+mod text_manipulation;
+
 struct Entry {
     datetime_string: String,
     text: String,
+    piglatin_text: String,
 }
 
 impl Entry {
@@ -9,11 +12,12 @@ impl Entry {
         Self {
             datetime_string: String::from("2024-07-14 11:30:00"),
             text: String::from(text),
+            piglatin_text: text_manipulation::convert_to_piglatin(text),
         }
     }
 
     fn format_entry(&self) -> String {
-        format!("{} - {}", self.datetime_string, self.text)
+        format!("{} - {}\nPiglatin: {}", self.datetime_string, self.text, self.piglatin_text)
     }
 }
 
